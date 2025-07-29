@@ -1,6 +1,6 @@
 // Get input elements and sections
-const player1Input = document.getElementById("player-1");
-const player2Input = document.getElementById("player-2");
+const player1Input = document.getElementById("player1");
+const player2Input = document.getElementById("player2");
 const submitBtn = document.getElementById("submit");
 
 const inputSection = document.getElementById("input-section");
