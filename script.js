@@ -50,12 +50,11 @@ board.addEventListener("click", function (event) {
   if (cell.classList.contains("cell") && cell.textContent === "") {
     cell.textContent = currentPlayer;
 
-    if (checkWinner(currentPlayer)) {
-      messageDiv.textContent = `${player[currentPlayer]}, congratulations you won!`;
-      gameOver = true;
-      return;
-    }
-
+   if (checkWinner(currentPlayer)) {
+  messageDiv.textContent = `${player[currentPlayer]} congratulations you won!`; // NO COMMA!
+  gameOver = true;
+  return;
+}
     const allFilled = [...document.querySelectorAll(".cell")].every(c => c.textContent !== "");
     if (allFilled) {
       messageDiv.textContent = "It's a draw!";
