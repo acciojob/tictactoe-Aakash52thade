@@ -8,12 +8,11 @@ const gameSection = document.getElementById("game-section");
 const messageDiv = document.getElementById("message");
 const board = document.getElementById("board");
 
-// Game state variables
-let currentPlayer = "X";
-let player = { X: "", O: "" }; // Corrected: capital X
+// Game state
+let currentPlayer = "x"; // Lowercase to match Cypress tests
+let player = { x: "", o: "" };
 let gameOver = false;
 
-// All winning combinations
 const winningCombinations = [
   [1, 2, 3],
   [4, 5, 6],
@@ -25,34 +24,29 @@ const winningCombinations = [
   [3, 5, 7]
 ];
 
-// Handle submit button click
+// Handle submit
 submitBtn.addEventListener("click", function () {
-  const p1 = player1Input.value.trim(); // ✅ trim()
-  const p2 = player2Input.value.trim(); // ✅ trim()
+  const p1 = player1Input.value.trim();
+  const p2 = player2Input.value.trim();
 
   if (p1 === "" || p2 === "") {
     alert("Please enter both player names.");
     return;
   }
 
-  // Save player names
-  player.X = p1;
-  player.O = p2;
+  player.x = p1;
+  player.o = p2;
 
-  // Switch view
   inputSection.style.display = "none";
   gameSection.style.display = "block";
-
-  // Show first turn message
   messageDiv.textContent = `${player[currentPlayer]}, you're up`;
 });
 
-// Handle cell clicks
+// Handle game click
 board.addEventListener("click", function (event) {
   if (gameOver) return;
 
   const cell = event.target;
-
   if (cell.classList.contains("cell") && cell.textContent === "") {
     cell.textContent = currentPlayer;
 
@@ -62,7 +56,6 @@ board.addEventListener("click", function (event) {
       return;
     }
 
-    // Draw check
     const allFilled = [...document.querySelectorAll(".cell")].every(c => c.textContent !== "");
     if (allFilled) {
       messageDiv.textContent = "It's a draw!";
@@ -70,8 +63,7 @@ board.addEventListener("click", function (event) {
       return;
     }
 
-    // Switch turn
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    currentPlayer = currentPlayer === "x" ? "o" : "x";
     messageDiv.textContent = `${player[currentPlayer]}, you're up`;
   }
 });
